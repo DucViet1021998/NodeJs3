@@ -88,6 +88,9 @@ router.delete('/users/:userId', async (req, res) => {
 
 router.patch('/users/:userId/album', async (req, res) => {
     try {
+        if (!req.body.name || !req.body.author || !req.body.kind) {
+            return res.send('Nhập hết tên bài hát, tác giả, thể loại đi thằng ngu! ')
+        }
         const userId = await userModel.findById(req.params.userId)
         const album = userId.album
         const song = {
